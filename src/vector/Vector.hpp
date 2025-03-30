@@ -1,6 +1,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <memory>
+
 template <typename T, typename Allocator = std::allocator<T>>
 class Vector
 {
@@ -9,6 +11,7 @@ public:
     Vector();
 
     void push_back(const T &element);
+    void push_back(T&& element);
     
     template <typename... Args>
     void emplace_back(Args&&... args);
@@ -42,6 +45,14 @@ void Vector<T, Allocator>::push_back(const T &element)
     attemptGrow();
 
     new (m_data + m_size++) T{element};
+}
+
+template <typename T, typename Allocator>
+void Vector<T, Allocator>::push_back(T &&element)
+{
+    attemptGrow();
+
+    new (m_data + m_size++) T{std::move(element)};
 }
 
 template <typename T, typename Allocator>

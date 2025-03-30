@@ -1,7 +1,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-#include <Vector.hpp>
+#include "Vector.hpp"
+#include <vector>
 
 TEST_CASE("sizeof(Vector) == sizeof(std::vector)")
 {
@@ -29,6 +30,7 @@ TEST_CASE("Vector clear()")
     vector.push_back(12);
     vector.push_back(8);
     vector.push_back(7);
+
     vector.clear();
 
     CHECK(vector.empty());
